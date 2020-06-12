@@ -5,11 +5,6 @@ export default props => {
   const hero = props.hero
 
   return (
-    <Card>
-      <Image src={hero.image.url} wrapped ui={false} />
-      <Card.Content>
-        <Card.Header>{hero.name}</Card.Header>
-      </Card.Content>
-    </Card>
+    <Card image={hero.image.url} description={hero.name} />
   );
 }
