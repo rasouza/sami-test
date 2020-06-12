@@ -1,22 +1,26 @@
+import axios from "axios";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
-import { getHero as getHeroAPI } from './heroesApi'
+import { getAllHeroes } from './heroesApi'
 
-export const getHeroThunk = createAsyncThunk(
-  "heroes/getHero",
-  async id => (await getHeroAPI(id))
+export const getAllHeroesThunk = createAsyncThunk(
+  "heroes/getAll",
+  () => axios.all(getAllHeroes())
 );
 
 const heroeSlice = createSlice({
   name: "heroes",
   initialState: { heroes: [], heroesLoading: false },
   reducers: {
+    insertHero(state, action) {
+      state.heroes.push(action.payload);
+    }
   },
   extraReducers: {
-    [getHeroThunk.pending]: (state, action) => {
+    [getAllHeroesThunk.pending]: (state, action) => {
       state.heroesLoading = true
     },
-    [getHeroThunk.fulfilled]: (state, action) => {
-      state.heroes.push(action.payload)
+    [getAllHeroesThunk.fulfilled]: (state, action) => {
+      action.payload.forEach(hero => { state.heroes.push(hero) })
       state.heroesLoading = false;
     }
   }
