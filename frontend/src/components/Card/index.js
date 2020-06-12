@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { Card } from 'semantic-ui-react'
-import { getHero } from '../../redux/heroesSlice'
+import { getHero } from '../../redux/heroesApi'
 
 
 export default props => {
@@ -9,7 +9,7 @@ export default props => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    console.log(hero)
+    getHero(1)
   })
   return (
     <Card/>

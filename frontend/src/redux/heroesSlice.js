@@ -2,12 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const heroeSlice = createSlice({
   name: "heroes",
-  initialState: [],
+  initialState: { heroes: [], heroesLoading: false },
   reducers: {
     searchHero(state, action) {},
-    getHero(state, action) {
-      state.list.push({name: action.payload})
-    }
+    getHero(state, action) {}
   },
 });
 
