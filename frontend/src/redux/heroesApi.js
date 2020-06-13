@@ -4,7 +4,7 @@ import { range } from 'lodash-fp'
 const HEROES_COUNT = 731 // Total number of heroes in Heroes API
 
 const client = axios.create({
-  baseURL: process.env.REACT_APP_HERO_API
+  baseURL: `${process.env.REACT_APP_HERO_API}/${process.env.REACT_APP_HERO_TOKEN}`
 })
 
 export const getHero = id => client.get(`/${id}`).then(res => res.data)
