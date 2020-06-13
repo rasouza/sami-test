@@ -8,6 +8,8 @@ It provides the following features:
 * View hero's profile
 
 ## Libs
+* [React 16](https://reactjs.org/)
+* [Axios](https://github.com/axios/axios)
 * [Redux Toolkit](https://redux-toolkit.js.org/)
 * [Semantic UI React](https://react.semantic-ui.com/)
 * [Lodash FP](https://github.com/lodash/lodash/wiki/FP-Guide) (Functional Programming version)
