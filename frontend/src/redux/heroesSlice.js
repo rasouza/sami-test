@@ -8,7 +8,7 @@ export const searchHeroThunk = createAsyncThunk(
 
 const heroeSlice = createSlice({
   name: "heroes",
-  initialState: { list: [], loading: false},
+  initialState: { list: [], loading: false, errors: [] },
   reducers: {
     clearResult(state, action) {
       state.list = []
@@ -23,6 +23,10 @@ const heroeSlice = createSlice({
       if (action.payload.results) {
         action.payload.results.forEach(hero => { state.list.push(hero) })
       }
+      state.loading = false;
+    },
+    [searchHeroThunk.rejected]: (state, action) => {
+      state.errors.push(action.error.message)
       state.loading = false;
     }
   }
