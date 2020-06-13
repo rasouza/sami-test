@@ -11,6 +11,8 @@ It provides the following features:
 * [Redux Toolkit](https://redux-toolkit.js.org/)
 * [Semantic UI React](https://react.semantic-ui.com/)
 * [Lodash FP](https://github.com/lodash/lodash/wiki/FP-Guide) (Functional Programming version)
+* [Jest](https://jestjs.io/en/)
+* [Enzyme](https://enzymejs.github.io/enzyme/)
 
 ## Installation
 * Rename `.env.example` to `.env`
