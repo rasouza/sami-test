@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Container, Header, Grid, Card } from "semantic-ui-react";
+import { Container, Header, Grid, Card, Segment, Dimmer, Loader } from "semantic-ui-react";
 import { useSelector, useDispatch } from 'react-redux'
 import ModalHero from '../../components/Modal'
 import { getAllHeroesThunk } from '../../redux/heroesSlice'
@@ -7,6 +7,7 @@ import { getAllHeroesThunk } from '../../redux/heroesSlice'
 
 export default props => {
   const heroes = useSelector((state) => state.heroes);
+  const heroesLoading = useSelector((state) => state.heroesLoading);
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -24,11 +25,12 @@ export default props => {
             {/* <Search /> */}
           </Grid.Column>
         </Grid.Row>
-        <Card.Group itemsPerRow={5}>
-          {heroes.map((hero) => (
-            <ModalHero key={hero.id} hero={hero} />
-          ))}
-        </Card.Group>
+          <Loader active={heroesLoading} inline="centered" />
+          <Card.Group itemsPerRow={5}>
+            {heroes.map((hero) => (
+              <ModalHero key={hero.id} hero={hero} />
+            ))}
+          </Card.Group>        
       </Grid>
     </Container>
   );
