@@ -1,6 +1,6 @@
 ![Preview](preview.png)
 
-Heroes App is a frontend application written in React which consumes [Superhero API](https://superheroapi.com/) and uses [Semantic UI React](https://react.semantic-ui.com/) as its design system for the sole purpose of speeding development up. 
+**Heroes App** is a frontend application written in React which consumes [Superhero API](https://superheroapi.com/) and uses [Semantic UI React](https://react.semantic-ui.com/) as its design system for the sole purpose of speeding development up. 
 
 It provides the following features:
 * Search for heroes
