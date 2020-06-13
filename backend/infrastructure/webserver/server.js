@@ -1,10 +1,9 @@
 'use strict'
 
-const restify = require('restify')
-
-const createServer = () => {
-  const server = restify.createServer()
-  return server
+exports = module.exports = restify => {
+  const server = restify.createServer();
+  return server;
 }
 
-module.exports = createServer
+exports["@singleton"] = true;
+exports["@require"] = ['restify'];

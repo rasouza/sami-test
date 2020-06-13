@@ -1,10 +1,12 @@
 'use strict'
 
-const createServer = require('./infrastructure/webserver/server')
+require("dotenv").config();
 
-const server = createServer()
-server.listen(8080, () => {
-  console.log(
-    `${server.name} listening at ${server.url}`
-  )
-})
+const IoC = require('electrolyte')
+const bootstrap = require('./infrastructure/config/bootstrap')
+
+IoC.use(IoC.node_modules())
+IoC.use(IoC.dir("."));
+
+bootstrap.init()
+bootstrap.createServer()
