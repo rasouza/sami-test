@@ -1,4 +1,3 @@
-# Frontend
 ![Preview](preview.png)
 
 Heroes App is a frontend application written in React which consumes [Superhero API](https://superheroapi.com/) and uses [Semantic UI React](https://react.semantic-ui.com/) as its design system for the sole purpose of speeding development up. 
@@ -11,7 +10,7 @@ It provides the following features:
 ## Libs
 * [Redux Toolkit](https://redux-toolkit.js.org/)
 * [Semantic UI React](https://react.semantic-ui.com/)
-* [Lodash FP](https://github.com/lodash/lodash/wiki/FP-Guide) (Function Programming version)
+* [Lodash FP](https://github.com/lodash/lodash/wiki/FP-Guide) (Functional Programming version)
 
 ## Installation
 * Rename `.env.example` to `.env`
