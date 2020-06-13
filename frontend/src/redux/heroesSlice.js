@@ -1,29 +1,32 @@
-import axios from "axios";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
-import { getAllHeroes } from './heroesApi'
+import { searchHero } from './heroesApi'
 
-export const getAllHeroesThunk = createAsyncThunk(
-  "heroes/getAll",
-  () => axios.all(getAllHeroes())
+export const searchHeroThunk = createAsyncThunk(
+  "heroes/search",
+  name => searchHero(name)
 );
 
 const heroeSlice = createSlice({
   name: "heroes",
-  initialState: { heroes: [], heroesLoading: false },
+  initialState: { list: [], loading: false},
   reducers: {
-    insertHero(state, action) {
-      state.heroes.push(action.payload);
+    clearResult(state, action) {
+      state.list = []
     }
   },
   extraReducers: {
-    [getAllHeroesThunk.pending]: (state, action) => {
-      state.heroesLoading = true
+    [searchHeroThunk.pending]: (state, action) => {
+      state.loading = true
     },
-    [getAllHeroesThunk.fulfilled]: (state, action) => {
-      action.payload.forEach(hero => { state.heroes.push(hero) })
-      state.heroesLoading = false;
+    [searchHeroThunk.fulfilled]: (state, action) => {
+      state.list = []
+      if (action.payload.results) {
+        action.payload.results.forEach(hero => { state.list.push(hero) })
+      }
+      state.loading = false;
     }
   }
 });
 
+export const { clearResult } = heroeSlice.actions
 export default heroeSlice.reducer

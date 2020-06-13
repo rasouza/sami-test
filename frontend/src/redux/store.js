@@ -3,5 +3,5 @@ import heroesReducer from "./heroesSlice";
 
 
 export default configureStore({
-    reducer: heroesReducer
+    reducer: { heroes: heroesReducer }
 })
