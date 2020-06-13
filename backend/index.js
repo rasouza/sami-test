@@ -1,8 +1,10 @@
-'use strict';
+'use strict'
 
-const restify = require('restify');
+const createServer = require('./infrastructure/webserver/server')
 
-const server = restify.createServer();
+const server = createServer()
 server.listen(8080, () => {
-  console.log(`${server.name} listening at ${server.url}`)
+  console.log(
+    `${server.name} listening at ${server.url}`
+  )
 })
