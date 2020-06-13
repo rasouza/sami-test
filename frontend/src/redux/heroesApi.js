@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { range } from 'lodash-fp'
 
-const HEROES_COUNT = 5 // Total number of heroes in Heroes API 731
+const HEROES_COUNT = 10 // Total number of heroes in Heroes API 731
 
 const client = axios.create({
   baseURL: process.env.REACT_APP_HERO_API

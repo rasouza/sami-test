@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
 import { Container, Header, Grid, Card } from "semantic-ui-react";
 import { useSelector, useDispatch } from 'react-redux'
-import Modal from '../../components/Modal'
-import HeroCard from '../../components/Card'
+import ModalHero from '../../components/Modal'
 import { getAllHeroesThunk } from '../../redux/heroesSlice'
 
 
@@ -12,7 +11,7 @@ export default props => {
 
   useEffect(() => {
     dispatch(getAllHeroesThunk());
-  }, heroes);
+  }, []);
 
   return (
     <Container text>
@@ -26,8 +25,8 @@ export default props => {
           </Grid.Column>
         </Grid.Row>
         <Card.Group itemsPerRow={5}>
-          {heroes.map(hero => (
-            <HeroCard hero={hero} />
+          {heroes.map((hero) => (
+            <ModalHero key={hero.id} hero={hero} />
           ))}
         </Card.Group>
       </Grid>
