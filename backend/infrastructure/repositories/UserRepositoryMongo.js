@@ -48,7 +48,7 @@ exports = module.exports = (User, MongooseUser, errors) => {
     async merge(id, data) {
       try {
         const mongooseUser = await MongooseUser.findByIdAndUpdate(id, data, { new: true });
-        console.log(mongooseUser.cpf);
+
         return new User(
           mongooseUser.id,
           mongooseUser.name,
@@ -60,8 +60,11 @@ exports = module.exports = (User, MongooseUser, errors) => {
       } catch(err) {
         if (err.name === 'CastError') {
           throw new errors.NotFound("User not found");
+        } 
+        else if (err.code == 11000) {
+          throw new errors.AlreadyExists("This CPF already exists");
         } else {
-          throw err
+          throw err;
         }
       }
     },
