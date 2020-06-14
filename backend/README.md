@@ -1,3 +1,5 @@
+![Code Coverage](https://img.shields.io/badge/coverage-96%25-green?style=flat-square)
+
 ![Preview](preview.png)
 
 This backend implements a [RESTful](https://restfulapi.net/) CRUD interface for users and complies with Eric Evan's [DDD](https://en.wikipedia.org/wiki/Domain-driven_design) and Uncle Bob's [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) which is briefly explained here in the document. 
