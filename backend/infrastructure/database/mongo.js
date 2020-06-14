@@ -10,13 +10,13 @@ exports = module.exports = mongoose => {
     useCreateIndex: true,
     user: DB_USER,
     pass: DB_PASS
-  });
-  
-  const db = mongoose.connection;
-  db.on("error", console.error.bind(console, "connection error:"));
-  db.once("open", () => {
-    console.log("connected to MongoDB database!");
-  });
+  })
+
+  const db = mongoose.connection
+  db.on('error', console.error.bind(console, 'connection error:'))
+  db.once('open', () => {
+    console.log('connected to MongoDB database!')
+  })
 
   return mongoose
 }

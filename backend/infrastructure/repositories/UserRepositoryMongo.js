@@ -1,13 +1,11 @@
 'use strict'
 
-const { remove } = require("winston")
-
 exports = module.exports = (User, MongooseUser, errors) => {
   return {
-    async find() {
+    async find () {
       return MongooseUser.find()
     },
-    async persist(user) {
+    async persist (user) {
       const { name, cpf, birthdate, subscription, dependents } = user
       const mongooseUser = new MongooseUser({ name, cpf, birthdate, subscription, dependents })
       try {
@@ -19,12 +17,12 @@ exports = module.exports = (User, MongooseUser, errors) => {
           mongooseUser.birthdate,
           mongooseUser.subscription,
           mongooseUser.dependents
-        );
+        )
       } catch (err) {
-        if (err.code == 11000) { throw new errors.AlreadyExists('This CPF already exists') }      
+        if (err.code === 11000) { throw new errors.AlreadyExists('This CPF already exists') }
       }
     },
-    async get(id) {
+    async get (id) {
       try {
         const mongooseUser = await MongooseUser.findById(id)
         if (!mongooseUser) { throw new errors.NotFound('User not found') }
@@ -36,18 +34,18 @@ exports = module.exports = (User, MongooseUser, errors) => {
           mongooseUser.birthdate,
           mongooseUser.subscription,
           mongooseUser.dependents
-        );
+        )
       } catch (err) {
-        if (err.name === "CastError") {
-          throw new errors.NotFound("User not found");
+        if (err.name === 'CastError') {
+          throw new errors.NotFound('User not found')
         } else {
-          throw err;
+          throw err
         }
       }
     },
-    async merge(id, data) {
+    async merge (id, data) {
       try {
-        const mongooseUser = await MongooseUser.findByIdAndUpdate(id, data, { new: true });
+        const mongooseUser = await MongooseUser.findByIdAndUpdate(id, data, { new: true })
 
         return new User(
           mongooseUser.id,
@@ -56,21 +54,25 @@ exports = module.exports = (User, MongooseUser, errors) => {
           mongooseUser.birthdate,
           mongooseUser.subscription,
           mongooseUser.dependents
-        );
-      } catch(err) {
+        )
+      } catch (err) {
         if (err.name === 'CastError') {
-          throw new errors.NotFound("User not found");
-        } 
-        else if (err.code == 11000) {
-          throw new errors.AlreadyExists("This CPF already exists");
+          throw new errors.NotFound('User not found')
+        } else if (err.code === 11000) {
+          throw new errors.AlreadyExists('This CPF already exists')
         } else {
-          throw err;
+          throw err
         }
       }
     },
 
-    async remove(id) {
-      return await MongooseUser.findOneAndDelete({ _id: id })
+    async remove (id) {
+      const mongooseUser = await MongooseUser.findOneAndDelete({ _id: id })
+      if (!mongooseUser) {
+        throw new errors.NotFound('User not found')
+      }
+
+      return mongooseUser
     }
   }
 }

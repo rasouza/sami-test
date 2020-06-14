@@ -1,10 +1,10 @@
 db.createUser({
-  user: "myuser",
-  pwd: "mypass",
+  user: 'myuser',
+  pwd: 'mypass',
   roles: [
     {
-      role: "readWrite",
-      db: "users",
-    },
-  ],
-});
+      role: 'readWrite',
+      db: 'users'
+    }
+  ]
+})
