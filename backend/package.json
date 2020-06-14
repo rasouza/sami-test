@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon",
     "start": "node index.js",
-    "test": "nyc mocha --recursive --exit"
+    "test": "nyc --reporter=html --report-dir=coverage mocha --recursive --exit"
   },
   "repository": {
     "type": "git",

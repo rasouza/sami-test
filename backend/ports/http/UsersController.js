@@ -46,11 +46,7 @@ exports = module.exports = (errors, ListUsers, CreateUser, GetUser, UpdateUser, 
         await DeleteUser(req.params.id)
         res.send(204, {})
       } catch (err) {
-        if (err.name === 'NotFound') {
-          next(new errors.NotFoundError())
-        } else {
           next(err)
-        }
       }
     }
   }
