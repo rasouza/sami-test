@@ -6,6 +6,13 @@ This backend implements a [RESTful](https://restfulapi.net/) CRUD interface for 
 
 It also exposes a `/docs/` endpoint for further reference and `/coverage/` for test coverage.
 
+## Libs
+* [Restify](http://restify.com/)
+* [Mongoose](https://mongoosejs.com/)
+* [Lodash FP](https://github.com/lodash/lodash/wiki/FP-Guide) Functional Programming version
+* [electrolyte](https://github.com/jaredhanson/electrolyte) as Dependency Injection container
+* [dotenv](https://www.npmjs.com/package/dotenv)
+
 ## Installation
 
 ```
