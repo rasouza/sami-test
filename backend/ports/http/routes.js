@@ -10,6 +10,11 @@ exports = module.exports = UsersController => ([
     method: 'post',
     path: '/users',
     handler: UsersController.createUser
+  },
+  {
+    method: 'get',
+    path: '/users/:id',
+    handler: UsersController.findUser
   }
 ])
 
