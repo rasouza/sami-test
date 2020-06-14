@@ -1,15 +1,15 @@
 'use strict'
 
-exports = module.exports = (User, MongooseUser) => {
+exports = module.exports = (User, MongooseUser, errors) => {
   return {
     async find() {
-      return await MongooseUser.find()
+      return MongooseUser.find()
     },
     async persist(user) {
       const { name, cpf, birthdate, subscription, dependents } = user
-      const mongooseUser = await new MongooseUser({ name, cpf, birthdate, subscription, dependents })
+      const mongooseUser = new MongooseUser({ name, cpf, birthdate, subscription, dependents })
       await mongooseUser.save()
-      return await new User(
+      return new User(
         mongooseUser.id,
         mongooseUser.name,
         mongooseUser.cpf,
@@ -21,20 +21,43 @@ exports = module.exports = (User, MongooseUser) => {
     async get(id) {
       try {
         const mongooseUser = await MongooseUser.findById(id)
+        return new User(
+          mongooseUser.id,
+          mongooseUser.name,
+          mongooseUser.cpf,
+          mongooseUser.birthdate,
+          mongooseUser.subscription,
+          mongooseUser.dependents
+        );
       } catch (err) {
-        throw new Error('NotFound')
+        if (err.name === "CastError") {
+          throw new errors.NotFound();
+        } else {
+          throw err;
+        }
       }
-
-      return await new User(
-        mongooseUser.id,
-        mongooseUser.name,
-        mongooseUser.cpf,
-        mongooseUser.birthdate,
-        mongooseUser.subscription,
-        mongooseUser.dependents
-      );
+    },
+    async merge(id, data) {
+      try {
+        const mongooseUser = await MongooseUser.findByIdAndUpdate(id, data, { new: true });
+        console.log(mongooseUser.cpf);
+        return new User(
+          mongooseUser.id,
+          mongooseUser.name,
+          mongooseUser.cpf,
+          mongooseUser.birthdate,
+          mongooseUser.subscription,
+          mongooseUser.dependents
+        );
+      } catch(err) {
+        if (err.name === 'CastError') {
+          throw new errors.NotFound();
+        } else {
+          throw err
+        }
+      }
     }
   }
 }
 
-exports['@require'] = ['domain/User', 'schemas/User']
+exports['@require'] = ['domain/User', 'schemas/User', 'ports/http/errors']
