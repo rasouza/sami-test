@@ -4,7 +4,7 @@ const IoC = require('electrolyte');
 
 module.exports = {
   async init() {
-    // await IoC.create(`infrastructure/database/${process.env.DB_DRIVER}`)
+    // put your initializer here...
   },
 
   async registerProviders() {
