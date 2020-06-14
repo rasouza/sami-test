@@ -53,8 +53,6 @@ describe('Users API', async () => {
     });
   });
 
-  
-
   describe('When there are users in database', () => {
     describe("GET /users/:id", () => {
       it("returns 404 when an user not exists", async () => {
