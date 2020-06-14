@@ -1,7 +1,7 @@
 'use strict'
 
 exports = module.exports = () => class {
-  constructor(id = null, cpf, birthdate, subscription, dependents) {
+  constructor(id = null, name, cpf, birthdate, subscription, dependents) {
     this.name = name
     this.cpf = cpf
     this.birthdate = birthdate

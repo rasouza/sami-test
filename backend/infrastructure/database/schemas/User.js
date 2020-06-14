@@ -2,7 +2,11 @@
 
 exports = module.exports = ({database: mongoose}) => mongoose.model('User', new mongoose.Schema({
   name: String,
-  cpf: String,
+  cpf: {
+    type: Number,
+    index: true,
+    unique: true
+  },
   birthdate: Date,
   subscription: {
     type: String,
