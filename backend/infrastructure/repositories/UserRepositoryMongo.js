@@ -1,5 +1,7 @@
 'use strict'
 
+const { remove } = require("winston")
+
 exports = module.exports = (User, MongooseUser, errors) => {
   return {
     async find() {
@@ -21,6 +23,8 @@ exports = module.exports = (User, MongooseUser, errors) => {
     async get(id) {
       try {
         const mongooseUser = await MongooseUser.findById(id)
+        if (!mongooseUser) { throw new errors.NotFound() }
+
         return new User(
           mongooseUser.id,
           mongooseUser.name,
@@ -56,6 +60,10 @@ exports = module.exports = (User, MongooseUser, errors) => {
           throw err
         }
       }
+    },
+
+    async remove(id) {
+      return await MongooseUser.findOneAndDelete({ _id: id })
     }
   }
 }
