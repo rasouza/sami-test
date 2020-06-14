@@ -18,6 +18,13 @@ connected to MongoDB database!
 ```
 Access http://localhost:8080/docs/
 
+## Testing
+
+```
+npm test
+```
+It uses an in-memory DB to run tests so you don't need to have mongodb up and running
+
 ## Clean Architecture
 
 ![Cleab Architecture](https://blog.cleancoder.com/uncle-bob/images/2012-08-13-the-clean-architecture/CleanArchitecture.jpg)
@@ -32,7 +39,7 @@ Access http://localhost:8080/docs/
 └ infrastructure                → Frameworks, drivers and tools such as Database, the Web Framework, mailing/logging/glue code etc.
     └ config                    → Application configuration files, modules and services
         └ container.js          → Module that manage service implementations by environment
-        └ bootstrap.js          → Hooks for application creation
+        └ bootstrap.js          → Application's Composition Root
     └ database                  → Database ORMs middleware
         └ schemas               → Mongoose schemas
     └ repositories              → Implementation of domain repository interfaces
