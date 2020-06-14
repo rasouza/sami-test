@@ -2,7 +2,7 @@
 
 const User = require("../../infrastructure/database/schemas/User");
 
-exports = module.exports = (UsersController) => [
+exports = module.exports = (restify, UsersController) => [
   {
     method: "get",
     path: "/users",
@@ -33,7 +33,15 @@ exports = module.exports = (UsersController) => [
     path: "/users/:id",
     handler: UsersController.deleteUser,
   },
+  {
+    method: "get",
+    path: "/docs/*",
+    handler: restify.plugins.serveStatic({
+      directory: `${__dirname}../../../`,
+      default: "index.html"
+    }),
+  },
 ];
 
 exports["@singleton"] = true;
-exports["@require"] = ['ports/http/UsersController'];
+exports["@require"] = ['restify', 'ports/http/UsersController'];
