@@ -4,7 +4,16 @@ const IoC = require('electrolyte');
 
 module.exports = {
   async init() {
-    await IoC.create(`infrastructure/database/${process.env.DB_DRIVER}`)
+    // await IoC.create(`infrastructure/database/${process.env.DB_DRIVER}`)
+  },
+
+  async registerProviders() {
+    const container = await IoC.create('container')
+
+    if (process.env.DB_DRIVER === 'mongo') {
+      container.database = await IoC.create('infrastructure/database/mongo');
+      container.userRepository = await IoC.create('infrastructure/repositories/UserRepositoryMongo')
+    } 
   },
 
   async createServer() {
@@ -15,3 +24,5 @@ module.exports = {
     });
   }
 }
+
+exports["@singleton"] = true;
