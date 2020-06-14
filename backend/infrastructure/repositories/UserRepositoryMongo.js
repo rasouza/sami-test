@@ -10,20 +10,24 @@ exports = module.exports = (User, MongooseUser, errors) => {
     async persist(user) {
       const { name, cpf, birthdate, subscription, dependents } = user
       const mongooseUser = new MongooseUser({ name, cpf, birthdate, subscription, dependents })
-      await mongooseUser.save()
-      return new User(
-        mongooseUser.id,
-        mongooseUser.name,
-        mongooseUser.cpf,
-        mongooseUser.birthdate,
-        mongooseUser.subscription,
-        mongooseUser.dependents
-      );
+      try {
+        await mongooseUser.save()
+        return new User(
+          mongooseUser.id,
+          mongooseUser.name,
+          mongooseUser.cpf,
+          mongooseUser.birthdate,
+          mongooseUser.subscription,
+          mongooseUser.dependents
+        );
+      } catch (err) {
+        if (err.code == 11000) { throw new errors.AlreadyExists('This CPF already exists') }      
+      }
     },
     async get(id) {
       try {
         const mongooseUser = await MongooseUser.findById(id)
-        if (!mongooseUser) { throw new errors.NotFound() }
+        if (!mongooseUser) { throw new errors.NotFound('User not found') }
 
         return new User(
           mongooseUser.id,
@@ -35,7 +39,7 @@ exports = module.exports = (User, MongooseUser, errors) => {
         );
       } catch (err) {
         if (err.name === "CastError") {
-          throw new errors.NotFound();
+          throw new errors.NotFound("User not found");
         } else {
           throw err;
         }
@@ -55,7 +59,7 @@ exports = module.exports = (User, MongooseUser, errors) => {
         );
       } catch(err) {
         if (err.name === 'CastError') {
-          throw new errors.NotFound();
+          throw new errors.NotFound("User not found");
         } else {
           throw err
         }

@@ -7,6 +7,7 @@ exports = module.exports = mongoose => {
   mongoose.connect(connectionString, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useCreateIndex: true,
     user: DB_USER,
     pass: DB_PASS
   });

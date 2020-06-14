@@ -1,13 +1,17 @@
 'use strict'
-
-class NotFound extends Error {
+const errors = require('restify-errors')
+class NotFound extends errors.NotFoundError {
   constructor(message) {
     super(message)
-    this.statusCode = 404
-    this.name = 'NotFound'
+  }
+}
+
+class AlreadyExists extends errors.ForbiddenError {
+  constructor(message) {
+    super(message)
   }
 }
 
 exports = module.exports = () => {
-  return { NotFound }
+  return { NotFound, AlreadyExists }
 }
