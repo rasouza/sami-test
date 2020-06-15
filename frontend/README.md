@@ -1,8 +1,15 @@
 ![Preview](preview.png)
 
+## Table of Contents
+* [Features](#features)
+* [Libs](#libs)
+* [Installation](#installation)
+* [Usage](#usage)
+* [Testing](#testing)
+
 **Heroes App** is a frontend application written in React which consumes [Superhero API](https://superheroapi.com/) and uses [Semantic UI React](https://react.semantic-ui.com/) as its design system for the sole purpose of speeding development up. 
 
-It provides the following features:
+## Features
 * Search for heroes
 * List heroes
 * View hero's profile
@@ -25,4 +32,9 @@ It provides the following features:
 ## Usage
 ```
 yarn start
+```
+
+## Testing
+```
+yarn test
 ```
