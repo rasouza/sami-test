@@ -10,11 +10,12 @@
         * [Ubiquitou Language](#ubiquitous-language)
     * [Architecture](#architecture)
     * [Product Vision](#product-vision)
+    * [A Thing to remember...](#a-thing-to-remember)
 
 ## Overview
 This document shows a possible tech architecture for a generic domain from a monolithic perspective, and it evolves to a microservice architecture using the concept of [Domain Driven Design](https://en.wikipedia.org/wiki/Domain-driven_design). 
 
-Even though the test doesn't require a specific domain, a microservice architecture would only make sense inside a specific context, where it mostly benefits from scalability and agility for such domain. I've chosen the **Healthcare** domain for the sake of identity with the company.
+>Even though the test doesn't require a specific domain, a microservice architecture would only make sense inside a specific context, where it mostly benefits from scalability and agility for such domain. I've chosen the **Healthcare** domain for the sake of identity with the company.
 
 The test has 3 hard requirements that must be fulfilled by the architect:
 
@@ -39,10 +40,10 @@ Although I find the solution above is sufficient to solve the problem, we can go
 ### Domain Driven Design
 It's crucial to understand the context the application belongs to before we go deeper in technical details. First, we're going to model our domain at business level and figure out what are the core concepts of our application (context map). Then, we will ensure everyone involved in the ecosystem has the same understanding about the product they working on (ubiquitous language).
 
-> Let's design a **Healthcare appointment** solution where we can schedule a doctor's appointment and upload previously done exams so it can be easily retrieved by the doctor whenever he/she needs. Additionally, doctors may write prescriptions for their patients after the appointment which will be uploaded and stored for further retrieval as well.
+> Let's design a **Healthcare appointment** solution where we can schedule a doctor's appointment and upload previously done exams so it can be easily retrieved by the doctor whenever he/she needs. Additionally, doctors may write prescriptions for their patients, after the appointment, which will be uploaded and stored for further retrieval as well.
 
 #### Context Map
-We can model our [Bounded Context](https://martinfowler.com/bliki/BoundedContext.html) after the Appointment [Aggregate Root](https://martinfowler.com/bliki/DDD_Aggregate.html): 
+We can model our [Bounded Context](https://martinfowler.com/bliki/BoundedContext.html) considering the Appointment as a [Aggregate Root](https://martinfowler.com/bliki/DDD_Aggregate.html): 
 ![Context Map](context-map.png)
 
 #### Ubiquitous Language
@@ -66,7 +67,7 @@ Also, each microservice has its own database sharing only what's necessary for e
 
 
 ### Product vision
-Talking about Agile, breaking our monolith down into microservices and separating into several squads would let us optimize delivery value in several ways. For example, let's say we separate into 4 squads and assign them each component:
+Why would we go microservices approach after all? Talking about Agile, breaking our monolith down into microservices and separating into several squads would let us optimize delivery value in several ways. For example, let's say we separate into 4 squads and assign them each component:
 * Doctor squad works on `Doctor` component
 * Appointment squad works on `Appointment` component
 * Patient squad works on `Patient` component
@@ -77,3 +78,8 @@ Below are suggestions for backlogs on each squad:
 * **Patient squad**: UX research on frontend, document uploader, notification system, etc.
 * **Appointment squad**: find best suitable time slot, recurrent scheduling, etc.
 * **Exam and Prescription squad**: OCR Image, ML diagnosis, drug delivery integration, etc.
+
+### A Thing to remember...
+> Keep in mind that microservices architecture is only necessary in a large, complex environment. Most regular systems would be better off just using simple monoliths following SOLID principles and reap benefits from frequent small deployments.
+
+*Inspirational cartoon: https://pbs.twimg.com/media/EQLSSZPXkAE4CPw.jpg*
