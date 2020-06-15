@@ -2,6 +2,16 @@
 
 ![Preview](preview.png)
 
+## Table of Contents
+* [Libs](#libs)
+* [Installation](#installation)
+* [Testing](#testing)
+* [Clean Architecture](#clean-architecture)
+    * [Folder structure](#folder-structure)
+    * [The Dependency Rule](#the-dependency-rule)
+* [Troubleshooting](#troubleshooting)
+
+
 This backend implements a [RESTful](https://restfulapi.net/) CRUD interface for users and complies with Eric Evan's [DDD](https://en.wikipedia.org/wiki/Domain-driven_design) and Uncle Bob's [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) which is briefly explained here in the document. 
 
 It also exposes a `/docs/` endpoint for further reference and `/coverage/` for test coverage.
